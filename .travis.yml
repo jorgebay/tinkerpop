@@ -8,6 +8,8 @@ dist: trusty
 cache:
   directories:
     - $HOME/mvn-home
+services:
+  - docker
 
 install:
   # install maven 3.2.5 (default minimum version for building TinkerPop) if it is not in cache already
@@ -24,14 +26,7 @@ addons:
 before_install:
   - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
-  - sudo apt-get update
-  - sudo apt-get install dotnet-dev-1.0.4
+#  - sudo apt-get update
+#  - sudo apt-get install dotnet-dev-1.0.4
 script: 
-  - "mvn clean install -Dci"
-#notifications:
-#  email:
-#    recipients:
-#      - me@gremlin.guru
-#      - robdale@gmail.com
-#    on_success: change # default: change
-#    on_failure: always # default: always
+  - "docker/build.sh -t -n -i"
