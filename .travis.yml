@@ -16,6 +16,10 @@ install:
   - export PATH=${HOME}/mvn-home/bin:${PATH}
   # visual check that we have the correct maven version installed
   - mvn -version
+  # include glvs
+  - touch gremlin-python/.glv
+  - touch gremlin-dotnet/src/.glv
+  - touch gremlin-dotnet/test/.glv
 
 addons:
   apt:
