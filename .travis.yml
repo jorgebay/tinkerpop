@@ -6,7 +6,14 @@ jdk:
 sudo: required
 dist: trusty
 
+before_install:
+  - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+  - sudo apt-get update
+  - sudo apt-get install dotnet-dev-1.0.4
+
 jobs:
   include:
     - script: "mvn clean install -Dci"
     - script: "touch gremlin-dotnet/src/.glv && touch gremlin-dotnet/test/.glv && mvn clean install -pl :gremlin-dotnet-tests -P gremlin-dotnet -DskipIntegrationTests=false"
+    - script: "touch gremlin-python/.glv && mvn clean install -Pglv-python"
