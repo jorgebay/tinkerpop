@@ -6,9 +6,7 @@ jdk:
 sudo: required
 dist: trusty
 
-script: "echo COMMON"
 jobs:
   include:
-    - script: "echo JUST GLV 1"
-    - script: "echo JUST GLV 2"
-      
+    - script: "mvn clean install -Dci"
+    - script: "touch gremlin-dotnet/src/.glv && touch gremlin-dotnet/test/.glv mvn clean install -pl :gremlin-dotnet-tests -P gremlin-dotnet -DskipIntegrationTests=false"
