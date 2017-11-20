@@ -16,7 +16,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install dotnet-dev-1.0.4
 script: 
-  - "mvn clean install -Dci"
+  - "mvn clean install -q -Dci"
 jobs:
   include:
   # glvs
