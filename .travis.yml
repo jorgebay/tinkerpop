@@ -6,21 +6,9 @@ jdk:
 sudo: required
 dist: trusty
 
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-before_install:
-  - sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
-  - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
-  - sudo apt-get update
-  - sudo apt-get install dotnet-dev-1.0.4
-script: 
-  - "mvn clean install -q -Dci"
+script: "echo COMMON"
 jobs:
   include:
-  # glvs
-    - stage: test_gremlin_net
-      install: touch gremlin-dotnet/src/.glv && touch gremlin-dotnet/test/.glv
-      script:  mvn clean install -DskipTests && mvn clean install -pl :gremlin-dotnet-tests -P gremlin-dotnet -DskipIntegrationTests=false
+    - script: "echo JUST GLV 1"
+    - script: "echo JUST GLV 2"
       
