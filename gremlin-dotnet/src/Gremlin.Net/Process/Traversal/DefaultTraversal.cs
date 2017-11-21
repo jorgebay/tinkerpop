@@ -91,9 +91,16 @@ namespace Gremlin.Net.Process.Traversal
         }
 
         /// <inheritdoc />
-        public E Current => (E)TraverserEnumerator.Current?.Object;
+        public E Current => (E) GetCurrent();
 
-        object IEnumerator.Current => Current;
+        /// <inheritdoc />
+        object IEnumerator.Current => GetCurrent();
+
+        private object GetCurrent()
+        {
+            // Use the object (not dynamic) result
+            return TraverserEnumerator.Current?.Object;
+        }
 
         private IEnumerator<Traverser> GetTraverserEnumerator()
         {
